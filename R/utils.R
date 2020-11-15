@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-.collapse_as_values <- function(item_vector, quotes=FALSE) {
+.collapse_as_values <- function(item_vector, quotes = FALSE) {
   unique_items <- unique(item_vector)
 
   if (quotes) {

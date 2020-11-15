@@ -7,7 +7,6 @@
 #'
 #' @examples
 go2cell <- function(go_ids) {
-
   go_ids_collapsed <- .collapse_as_values(go_ids, quotes = TRUE)
 
   genes_from_go <- .get_genes_from_go(go_ids_collapsed)

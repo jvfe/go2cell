@@ -7,7 +7,6 @@
 #'
 #' @examples
 .get_genes_from_go <- function(go_ids) {
-
   if (any(grepl("GO:\\d+", go_ids) == FALSE)) {
     stop(
       "A GO identifier given doesn't match the regex 'GO:\\d+', check your input for inconsistencies."
@@ -45,7 +44,7 @@
 #' @examples
 .query_ctp_turtle <- function(gene_items) {
   celltype_marker_graph <- rdflib::rdf_parse(celltype_marker_turtle,
-                                             format = c("turtle")
+    format = c("turtle")
   )
 
   ctp_sparql <-
