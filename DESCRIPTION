@@ -1,0 +1,21 @@
+Package: go2cell
+Type: Package
+Title: Get Cell Types Related To Gene Ontology IDs
+Version: 0.0.0.9000
+Authors@R: person("João Vitor", "F Cavalcante", , "jvfe@ufrn.edu.br", 
+    c("aut", "cre"), comment = c(ORCID = "0000-0001-7513-7376"))
+Description: Uses Wikidata queries and a local RDF database to link
+    Gene Ontology IDs to cell types.
+License: BSD + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    testthat
+RoxygenNote: 7.1.0
+Imports: 
+    magrittr,
+    rdflib,
+    dplyr,
+    WikidataQueryServiceR
+Depends: 
+    R (>= 2.10)
