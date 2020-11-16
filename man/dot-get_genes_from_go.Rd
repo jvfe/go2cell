@@ -2,16 +2,16 @@
 % Please edit documentation in R/queries.R
 \name{.get_genes_from_go}
 \alias{.get_genes_from_go}
-\title{Title}
+\title{Query Wikidata for genes related to GO ids}
 \usage{
 .get_genes_from_go(go_ids)
 }
 \arguments{
-\item{go_ids}{}
+\item{go_ids}{A character vector of GO identifiers}
 }
 \value{
-
+A dataframe of GO ids and genes
 }
 \description{
-Title
+Query Wikidata for genes related to GO ids
 }

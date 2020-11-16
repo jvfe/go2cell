@@ -2,16 +2,16 @@
 % Please edit documentation in R/queries.R
 \name{.get_celltype_items}
 \alias{.get_celltype_items}
-\title{Title}
+\title{Query Wikidata for cell type item names from cell type QIDs}
 \usage{
 .get_celltype_items(celltype_ids)
 }
 \arguments{
-\item{celltype_ids}{}
+\item{celltype_ids}{A character vector of cell type QIDs}
 }
 \value{
-
+A dataframe of QIDs and their respective labels
 }
 \description{
-Title
+Query Wikidata for cell type item names from cell type QIDs
 }

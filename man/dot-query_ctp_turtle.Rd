@@ -2,16 +2,16 @@
 % Please edit documentation in R/queries.R
 \name{.query_ctp_turtle}
 \alias{.query_ctp_turtle}
-\title{Title}
+\title{Query local database for cell types related to particular markers}
 \usage{
 .query_ctp_turtle(gene_items)
 }
 \arguments{
-\item{gene_items}{}
+\item{gene_items}{A character vector of markers}
 }
 \value{
-
+A dataframe of cell type Wikidata items and their respective markers
 }
 \description{
-Title
+Query local database for cell types related to particular markers
 }

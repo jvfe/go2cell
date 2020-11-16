@@ -2,16 +2,16 @@
 % Please edit documentation in R/utils.R
 \name{.remove_wdt_url}
 \alias{.remove_wdt_url}
-\title{Title}
+\title{Substitute the wikidata url for a SPARQL-friendly wd:}
 \usage{
 .remove_wdt_url(column)
 }
 \arguments{
-\item{column}{}
+\item{column}{The column of the dataframe to substitute}
 }
 \value{
-
+A character vector
 }
 \description{
-Title
+Substitute the wikidata url for a SPARQL-friendly wd:
 }

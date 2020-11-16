@@ -2,16 +2,18 @@
 % Please edit documentation in R/utils.R
 \name{.collapse_as_values}
 \alias{.collapse_as_values}
-\title{Title}
+\title{Format string or character vector as SPARQL-compatible list}
 \usage{
 .collapse_as_values(item_vector, quotes = FALSE)
 }
 \arguments{
-\item{quotes}{}
+\item{item_vector}{A string or a character vector of items}
+
+\item{quotes}{A logical to indicate whether or not to encase in quotes}
 }
 \value{
-
+A SPARQL-compatible string of the values
 }
 \description{
-Title
+Format string or character vector as SPARQL-compatible list
 }

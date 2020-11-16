@@ -17,6 +17,9 @@ celltype_marker_turtle
 A dataset consisting of a Turtle-syntax RDF graph
 of human cell types and their corresponding markers,
 extracted, manually curated and serialized from
-\url{https://panglaodb.se/}
+\url{https://panglaodb.se/} database
+}
+\author{
+Tiago Lubiana
 }
 \keyword{datasets}
