@@ -16,5 +16,5 @@ A dataframe of cell type Wikidata items and their respective markers
 Query local database for cell types related to particular markers
 }
 \examples{
-.query_ctp_turtle("(wd:Q14881255) (wd:Q18016342)")
+.query_ctp_turtle('(wd:Q14881255) (wd:Q18016342)')
 }

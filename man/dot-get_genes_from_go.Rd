@@ -16,5 +16,5 @@ A dataframe of GO ids and genes
 Query Wikidata for genes related to GO ids
 }
 \examples{
-.get_genes_from_go("('GO:0006936')")
+.get_genes_from_go('('GO:0006936')')
 }

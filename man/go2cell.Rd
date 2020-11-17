@@ -28,18 +28,18 @@ returning, at last, a dataframe of cell type information related to
 the given GO identifiers.
 }
 \examples{
-# Return cell types related to "muscle contraction" and "metabolism"
-go2cell(c("GO:0006936", "GO:0008152"))
+# Return cell types related to 'muscle contraction' and 'metabolism'
+go2cell(c('GO:0006936', 'GO:0008152'))
 
-# Return cell types related to "response to zinc ion"
-go2cell("GO:0010043")
+# Return cell types related to 'response to zinc ion'
+go2cell('GO:0010043')
 \dontrun{
 # IDs should use ':' not '_'
-go2cell("GO_0010043")
+go2cell('GO_0010043')
 }
 }
 \seealso{
-\url{https://www.wikidata.org/} for information regarding Wikidata and
-  \url{https://panglaodb.se/index.html} for the original database this information
-  was adapted from.
+\url{https://www.wikidata.org/} for information regarding
+  Wikidata and \url{https://panglaodb.se/index.html} for the
+  original database this information was adapted from.
 }
