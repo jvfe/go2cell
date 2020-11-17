@@ -1,7 +1,7 @@
 Package: go2cell
 Type: Package
 Title: Get Cell Types Related To Gene Ontology IDs
-Version: 0.0.0.9000
+Version: 0.99.0
 Authors@R: 
     c(person(given = "João Vitor",
              family = "F. Cavalcante",
@@ -20,7 +20,9 @@ License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Suggests: 
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 RoxygenNote: 7.1.0
 Imports: 
     magrittr,
@@ -29,4 +31,5 @@ Imports:
     WikidataQueryServiceR,
     stringr
 Depends: 
-    R (>= 2.10)
+    R (>= 4.0)
+VignetteBuilder: knitr
