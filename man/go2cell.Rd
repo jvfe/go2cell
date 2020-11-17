@@ -33,7 +33,6 @@ go2cell(c("GO:0006936", "GO:0008152"))
 
 # Return cell types related to "response to zinc ion"
 go2cell("GO:0010043")
-
 \dontrun{
 # IDs should use ':' not '_'
 go2cell("GO_0010043")

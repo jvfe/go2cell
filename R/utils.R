@@ -4,7 +4,8 @@
 #' @param quotes A logical to indicate whether or not to encase in quotes
 #'
 #' @return A SPARQL-compatible string of the values
-#'
+#' @examples
+#' .collapse_as_values(c("GO:0006936", "GO:0008152"))
 .collapse_as_values <- function(item_vector, quotes = FALSE) {
   unique_items <- stringr::str_trim(unique(item_vector))
 
@@ -20,7 +21,8 @@
 #' @param column The column of the dataframe to substitute
 #'
 #' @return A character vector
-#'
+#' @examples
+#' .remove_wdt_url(c("http://www.wikidata.org/entity/Q18031649", "http://www.wikidata.org/entity/Q227339"))
 .remove_wdt_url <- function(column) {
   stringr::str_replace_all(column, "http://www.wikidata.org/entity/", "wd:")
 }

@@ -3,6 +3,8 @@
 #' @param go_ids A character vector of GO identifiers
 #'
 #' @return A dataframe of GO ids and genes
+#' @examples
+#' .get_genes_from_go("('GO:0006936')")
 .get_genes_from_go <- function(go_ids) {
   if (any(grepl("GO:\\d+", go_ids) == FALSE)) {
     stop(
@@ -36,6 +38,8 @@
 #' @param gene_items A character vector of markers
 #'
 #' @return A dataframe of cell type Wikidata items and their respective markers
+#' @examples
+#' .query_ctp_turtle("(wd:Q14881255) (wd:Q18016342)")
 .query_ctp_turtle <- function(gene_items) {
   celltype_marker_graph <- rdflib::rdf_parse(celltype_marker_turtle,
     format = c("turtle")
@@ -66,7 +70,8 @@
 #' @param celltype_ids A character vector of cell type QIDs
 #'
 #' @return A dataframe of QIDs and their respective labels
-#'
+#' @examples
+#' .get_celltype_items("(wd:Q101405098) (wd:Q101404862)")
 .get_celltype_items <- function(celltype_ids) {
   message("Querying wikidata for cell type labels...")
   celltype_sparql <- sprintf(

@@ -15,3 +15,6 @@ A character vector
 \description{
 Substitute the wikidata url for a SPARQL-friendly wd:
 }
+\examples{
+.remove_wdt_url(c("http://www.wikidata.org/entity/Q18031649", "http://www.wikidata.org/entity/Q227339"))
+}
