@@ -12,7 +12,7 @@ test_that("Querying GO ids for genes works", {
 })
 
 test_that("Querying local rdf for cell types", {
-  celltypes <- .query_ctp_turtle(collapsed_gene_items)
+  celltypes <- .query_ctp_turtle(collapsed_gene_items, query_key = "gene", selector = "cell_type")
 
   expect_s3_class(celltypes, "data.frame")
   expect_true(nrow(celltypes) > 300)

@@ -9,7 +9,7 @@
     if (any(grepl("GO:\\d+", go_ids) == FALSE)) {
         stop("A GO identifier given doesn't match the regex 'GO:\\d+', check your input for inconsistencies.")
     }
-    
+
     message("Querying wikidata for GO/gene correspondence...")
     go_query <- sprintf("SELECT ?gene ?go_ids ?go_termLabel ?geneLabel
       WHERE
@@ -20,10 +20,10 @@
                  ?godomain ?go_term;
                  wdt:P702 ?gene.
         SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }
-      }", 
+      }",
         go_ids)
-    
-    WikidataQueryServiceR::query_wikidata(go_query) %>% dplyr::mutate(gene = .remove_wdt_url(gene), 
+
+    WikidataQueryServiceR::query_wikidata(go_query) %>% dplyr::mutate(gene = .remove_wdt_url(gene),
         )
 }
 
@@ -34,21 +34,23 @@
 #' @return A dataframe of cell type Wikidata items and their respective markers
 #' @examples
 #' .query_ctp_turtle('(wd:Q14881255) (wd:Q18016342)')
-.query_ctp_turtle <- function(gene_items) {
-    celltype_marker_graph <- rdflib::rdf_parse(celltype_marker_turtle, 
+.query_ctp_turtle <- function(query_values, query_key, selector) {
+    celltype_marker_graph <- rdflib::rdf_parse(celltype_marker_turtle,
         format = c("turtle"))
-    
-    ctp_sparql <- sprintf("PREFIX ctp: <http://celltypes.wiki.opencura.com/entity/>
-                     PREFIX wd: <http://www.wikidata.org/entity/>
-                       SELECT ?cell_type ?gene
-                       WHERE {
-                        VALUES (?genes) {%s}
-                        BIND (?genes AS ?gene)
-                        ?cell_type ctp:P9 ?gene .
-                       }", 
-        gene_items)
-    
-    rdflib::rdf_query(celltype_marker_graph, ctp_sparql) %>% dplyr::mutate(cell_type = .remove_wdt_url(cell_type), 
+
+    ctp_sparql <- stringr::str_glue(
+    "PREFIX ctp: <http://celltypes.wiki.opencura.com/entity/>
+     PREFIX wd: <http://www.wikidata.org/entity/>
+      SELECT ?{query_key} ?{selector}
+           WHERE {{
+            VALUES (?values) {{{query_values}}}
+            BIND (?values AS ?{selector})
+            ?{query_key} ctp:P9 ?{selector}.
+           }}"
+    )
+
+    rdflib::rdf_query(celltype_marker_graph, ctp_sparql) %>%
+      dplyr::mutate(cell_type = .remove_wdt_url(cell_type),
         gene = .remove_wdt_url(gene))
 }
 
@@ -66,9 +68,9 @@
   {
     VALUES (?cell_type) {%s}
     SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }
-  }", 
+  }",
         celltype_ids)
-    
-    celltype_wdt <- WikidataQueryServiceR::query_wikidata(celltype_sparql) %>% 
+
+    celltype_wdt <- WikidataQueryServiceR::query_wikidata(celltype_sparql) %>%
         dplyr::mutate(cell_type = .remove_wdt_url(cell_type))
 }
