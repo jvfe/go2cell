@@ -16,5 +16,5 @@ A dataframe of QIDs and their respective labels
 Query Wikidata for cell type item names from cell type QIDs
 }
 \examples{
-.get_celltype_items('(wd:Q101405098) (wd:Q101404862)')
+.get_celltype_items("(wd:Q101405098) (wd:Q101404862)")
 }

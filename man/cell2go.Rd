@@ -29,10 +29,10 @@ to gene markers of these cell types.
 \examples{
 # Return GO IDs related to cell type
 # 'human smooth muscle cell'
-cell2go('Q101404901')
+cell2go("Q101404901")
 \dontrun{
 # IDs should always start with 'Q'
-go2cell('101404901')
+go2cell("101404901")
 }
 }
 \seealso{

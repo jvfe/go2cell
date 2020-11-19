@@ -18,5 +18,5 @@ A SPARQL-compatible string of the values
 Format string or character vector as SPARQL-compatible list
 }
 \examples{
-.collapse_as_values(c('GO:0006936', 'GO:0008152'))
+.collapse_as_values(c("GO:0006936", "GO:0008152"))
 }

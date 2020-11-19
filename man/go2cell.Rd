@@ -29,13 +29,13 @@ the given GO identifiers.
 }
 \examples{
 # Return cell types related to 'muscle contraction' and 'metabolism'
-go2cell(c('GO:0006936', 'GO:0008152'))
+go2cell(c("GO:0006936", "GO:0008152"))
 
 # Return cell types related to 'response to zinc ion'
-go2cell('GO:0010043')
+go2cell("GO:0010043")
 \dontrun{
 # IDs should use ':' not '_'
-go2cell('GO_0010043')
+go2cell("GO_0010043")
 }
 }
 \seealso{

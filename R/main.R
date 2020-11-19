@@ -25,32 +25,37 @@
 #'
 #' @examples
 #' # Return cell types related to 'muscle contraction' and 'metabolism'
-#' go2cell(c('GO:0006936', 'GO:0008152'))
+#' go2cell(c("GO:0006936", "GO:0008152"))
 #'
 #' # Return cell types related to 'response to zinc ion'
-#' go2cell('GO:0010043')
+#' go2cell("GO:0010043")
 #' \dontrun{
 #' # IDs should use ':' not '_'
-#' go2cell('GO_0010043')
+#' go2cell("GO_0010043")
 #' }
 go2cell <- function(go_ids) {
-    go_ids_collapsed <- .collapse_as_values(go_ids, quotes = TRUE)
+  go_ids_collapsed <- .collapse_as_values(go_ids, quotes = TRUE)
 
-    genes_from_go <- .get_genes_from_go(go_ids_collapsed)
+  genes_from_go <- .get_genes_from_go(go_ids_collapsed)
 
-    gene_values <- .collapse_as_values(genes_from_go$gene)
+  gene_values <- .collapse_as_values(genes_from_go$gene)
 
-    celltypes <- .query_ctp_turtle(gene_values, query_key = "cell_type", selector = "gene") %>%
-        dplyr::filter(gene %in% genes_from_go$gene)
+  celltypes <- .query_ctp_turtle(gene_values, query_key = "cell_type", selector = "gene") %>%
+    dplyr::filter(gene %in% genes_from_go$gene)
 
-    celltypes_collapsed <- .collapse_as_values(celltypes$cell_type)
+  celltypes_collapsed <- .collapse_as_values(celltypes$cell_type)
 
-    celltype_wdt <- .get_celltype_items(celltypes_collapsed)
+  celltype_wdt <- .get_celltype_items(celltypes_collapsed)
 
-    final_table <- celltypes %>% dplyr::inner_join(genes_from_go,
-        by = "gene") %>% dplyr::left_join(celltype_wdt, by = c("cell_type")) %>%
-        dplyr::select(cell_type, cell_typeLabel, go_ids, go_termLabel,
-            geneLabel)
+  final_table <- celltypes %>%
+    dplyr::inner_join(genes_from_go,
+      by = "gene"
+    ) %>%
+    dplyr::left_join(celltype_wdt, by = c("cell_type")) %>%
+    dplyr::select(
+      cell_type, cell_typeLabel, go_ids, go_termLabel,
+      geneLabel
+    )
 }
 
 
@@ -72,7 +77,7 @@ go2cell <- function(go_ids) {
 #'    columns correspond to the Gene Ontology IDs given, and the last column
 #'    corresponds to the cell type's marker that led to the result.
 #'
-#'@seealso \url{https://www.wikidata.org/} for information regarding
+#' @seealso \url{https://www.wikidata.org/} for information regarding
 #'   Wikidata and \url{https://panglaodb.se/index.html} for the
 #'   original database this information was adapted from. For an
 #'   example of a cell type item in Wikidata, see
@@ -83,36 +88,36 @@ go2cell <- function(go_ids) {
 #' @examples
 #' # Return GO IDs related to cell type
 #' # 'human smooth muscle cell'
-#' cell2go('Q101404901')
+#' cell2go("Q101404901")
 #' \dontrun{
 #' # IDs should always start with 'Q'
-#' go2cell('101404901')
+#' go2cell("101404901")
 #' }
 cell2go <- function(celltype_qids) {
-
-    if (any(grepl("Q\\d+", celltype_qids) == FALSE)) {
-        stop("A QID given doesn't match the regex 'Q\\d+',
+  if (any(grepl("Q\\d+", celltype_qids) == FALSE)) {
+    stop("A QID given doesn't match the regex 'Q\\d+',
              check your input for inconsistencies.")
-    }
+  }
 
-    with_wd <- stringr::str_glue("(wd:{celltype_qids})")
-    qids_parsed <- paste(with_wd, collapse = " ")
+  with_wd <- stringr::str_glue("(wd:{celltype_qids})")
+  qids_parsed <- paste(with_wd, collapse = " ")
 
-    celltypes <- .query_ctp_turtle(qids_parsed, query_key = "cell_type", selector = "gene") %>%
-        dplyr::filter(cell_type %in% gsub("\\(|\\)", "", with_wd))
+  celltypes <- .query_ctp_turtle(qids_parsed, query_key = "cell_type", selector = "gene") %>%
+    dplyr::filter(cell_type %in% gsub("\\(|\\)", "", with_wd))
 
-    gene_values <- .collapse_as_values(celltypes$gene)
+  gene_values <- .collapse_as_values(celltypes$gene)
 
-    go_from_genes <- .get_go_from_genes(gene_values)
+  go_from_genes <- .get_go_from_genes(gene_values)
 
-    celltypes_collapsed <- .collapse_as_values(celltypes$cell_type)
+  celltypes_collapsed <- .collapse_as_values(celltypes$cell_type)
 
-    celltype_wdt <- .get_celltype_items(celltypes_collapsed)
+  celltype_wdt <- .get_celltype_items(celltypes_collapsed)
 
-    final_table <- celltypes %>%
-        dplyr::inner_join(go_from_genes, by = "gene") %>%
-        dplyr::left_join(celltype_wdt, by = c("cell_type")) %>%
-        dplyr::select(cell_type, cell_typeLabel, go_term, go_itemLabel,
-                      geneLabel)
-
+  final_table <- celltypes %>%
+    dplyr::inner_join(go_from_genes, by = "gene") %>%
+    dplyr::left_join(celltype_wdt, by = c("cell_type")) %>%
+    dplyr::select(
+      cell_type, cell_typeLabel, go_term, go_itemLabel,
+      geneLabel
+    )
 }
