@@ -4,10 +4,14 @@
 \alias{.query_ctp_turtle}
 \title{Query local database for cell types related to particular markers}
 \usage{
-.query_ctp_turtle(gene_items)
+.query_ctp_turtle(query_values, query_key, selector)
 }
 \arguments{
-\item{gene_items}{A character vector of markers}
+\item{query_values}{A character vector of SPARQL-valid values}
+
+\item{query_key}{A character of the key value to select items by}
+
+\item{selector}{A character vector of the query_values entity}
 }
 \value{
 A dataframe of cell type Wikidata items and their respective markers

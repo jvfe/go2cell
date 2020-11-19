@@ -2,7 +2,7 @@
 #'
 #' Return cell type information for specific Gene Ontology identifiers
 #'
-#' This function takes in a string or a character vector of
+#' This function takes in a character vector of
 #' Gene Ontology (GO) identifiers, queries Wikidata
 #' (\url{https://www.wikidata.org/})
 #' for genes related to said identifiers, and crosses this data
@@ -10,9 +10,9 @@
 #' returning, at last, a dataframe of cell type information related to
 #' the given GO identifiers.
 #'
-#' @param go_ids A string or a character vector of Gene Ontology identifiers.
+#' @param go_ids A character vector of Gene Ontology identifiers.
 #'
-#' @return A dataframe of 7 columns: The first two correspond to cell types,
+#' @return A dataframe of 5 columns: The first two correspond to cell types,
 #'    that is, their Wikidata Identifier and their name. The two following
 #'    columns correspond to the Gene Ontology IDs given, and the last column
 #'    corresponds to the cell type's marker that led to the result.
@@ -54,6 +54,40 @@ go2cell <- function(go_ids) {
 }
 
 
+#' Get GO ids from cell types
+#'
+#' Return GO identifiers related to gene markers
+#' of specific cell types.
+#'
+#' This function takes in a character vector of
+#' cell type Q identifiers (QIDs), queries Wikidata
+#' (\url{https://www.wikidata.org/})
+#' and a local RDF database to return GO IDs related
+#' to gene markers of these cell types.
+#'
+#' @param celltype_qids A character vector of cell type Wikidata IDs
+#'
+#' @return A dataframe of 5 columns: The first two correspond to cell types,
+#'    that is, their Wikidata Identifier and their name. The two following
+#'    columns correspond to the Gene Ontology IDs given, and the last column
+#'    corresponds to the cell type's marker that led to the result.
+#'
+#'@seealso \url{https://www.wikidata.org/} for information regarding
+#'   Wikidata and \url{https://panglaodb.se/index.html} for the
+#'   original database this information was adapted from. For an
+#'   example of a cell type item in Wikidata, see
+#'   \url{https://www.wikidata.org/wiki/Q101405098}
+#'
+#' @export
+#'
+#' @examples
+#' # Return GO IDs related to cell type
+#' # 'human smooth muscle cell'
+#' cell2go('Q101404901')
+#' \dontrun{
+#' # IDs should always start with 'Q'
+#' go2cell('101404901')
+#' }
 cell2go <- function(celltype_qids) {
 
     if (any(grepl("Q\\d+", celltype_qids) == FALSE)) {
