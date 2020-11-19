@@ -7,7 +7,8 @@
 #' .get_genes_from_go('('GO:0006936')')
 .get_genes_from_go <- function(go_ids) {
     if (any(grepl("GO:\\d+", go_ids) == FALSE)) {
-        stop("A GO identifier given doesn't match the regex 'GO:\\d+', check your input for inconsistencies.")
+        stop("A GO identifier given doesn't match the regex 'GO:\\d+',
+             check your input for inconsistencies.")
     }
 
     message("Querying wikidata for GO/gene correspondence...")
@@ -23,13 +24,14 @@
       }",
         go_ids)
 
-    WikidataQueryServiceR::query_wikidata(go_query) %>% dplyr::mutate(gene = .remove_wdt_url(gene),
-        )
+    WikidataQueryServiceR::query_wikidata(go_query) %>% dplyr::mutate(gene = .remove_wdt_url(gene))
 }
 
 #' Query local database for cell types related to particular markers
 #'
-#' @param gene_items A character vector of markers
+#' @param query_values A character vector of SPARQL-valid values
+#' @param query_key A character of the key value to select items by
+#' @param selector A character vector of the query_values entity
 #'
 #' @return A dataframe of cell type Wikidata items and their respective markers
 #' @examples
@@ -73,4 +75,31 @@
 
     celltype_wdt <- WikidataQueryServiceR::query_wikidata(celltype_sparql) %>%
         dplyr::mutate(cell_type = .remove_wdt_url(cell_type))
+}
+
+#' Query Wikidata for GO ids associated with particular genes
+#'
+#' @param genes A character vector of SPARQL-valid gene items
+#'
+#' @return A dataframe of GO ids and genes
+#'
+#' @examples
+#' .get_go_from_genes("(wd:Q15317282) (wd:Q14912592) (wd:Q14912176)")
+.get_go_from_genes <- function(genes) {
+  message("Querying wikidata for GO/gene correspondence...")
+  gene_sparql <- stringr::str_glue(
+  "SELECT ?gene ?go_term ?go_itemLabel ?geneLabel
+      WHERE
+      {{
+        VALUES (?gene) {{{genes}}}
+        ?gene wdt:P703 wd:Q15978631;
+              wdt:P688 ?protein .
+        ?protein (wdt:P680|wdt:P681|wdt:P682) ?go_item.
+        ?go_item wdt:P686 ?go_term.
+
+        SERVICE wikibase:label {{ bd:serviceParam wikibase:language 'en'. }}
+      }}")
+
+  WikidataQueryServiceR::query_wikidata(gene_sparql) %>%
+    dplyr::mutate(gene = .remove_wdt_url(gene))
 }

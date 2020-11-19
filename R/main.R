@@ -52,3 +52,33 @@ go2cell <- function(go_ids) {
         dplyr::select(cell_type, cell_typeLabel, go_ids, go_termLabel,
             geneLabel)
 }
+
+
+cell2go <- function(celltype_qids) {
+
+    if (any(grepl("Q\\d+", celltype_qids) == FALSE)) {
+        stop("A QID given doesn't match the regex 'Q\\d+',
+             check your input for inconsistencies.")
+    }
+
+    with_wd <- stringr::str_glue("(wd:{celltype_qids})")
+    qids_parsed <- paste(with_wd, collapse = " ")
+
+    celltypes <- .query_ctp_turtle(qids_parsed, query_key = "cell_type", selector = "gene") %>%
+        dplyr::filter(cell_type %in% gsub("\\(|\\)", "", with_wd))
+
+    gene_values <- .collapse_as_values(celltypes$gene)
+
+    go_from_genes <- .get_go_from_genes(gene_values)
+
+    celltypes_collapsed <- .collapse_as_values(celltypes$cell_type)
+
+    celltype_wdt <- .get_celltype_items(celltypes_collapsed)
+
+    final_table <- celltypes %>%
+        dplyr::inner_join(go_from_genes, by = "gene") %>%
+        dplyr::left_join(celltype_wdt, by = c("cell_type")) %>%
+        dplyr::select(cell_type, cell_typeLabel, go_term, go_itemLabel,
+                      geneLabel)
+
+}
