@@ -7,46 +7,38 @@
 
 <!-- badges: end -->
 
-The goal of go2cell is to …
+By using [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page)
+and a local RDF database of cell type gene markers, go2cell links Gene
+Ontology terms to cell types, therefore enriching Omics results with
+open semantic knowledge.
 
 ## Installation
 
-You can install the released version of go2cell from
-[CRAN](https://CRAN.R-project.org) with:
+You can install the latest version of go2cell from GitHub with:
 
 ``` r
-install.packages("go2cell")
+install.packages("remotes")
+remotes::install_github("jvfe/go2cell")
 ```
 
-## Example
+## Quickstart
 
-This is a basic example which shows you how to solve a common problem:
+Suppose we want to retrieve cell types with gene markers related to GO
+terms ‘muscle contraction’ and ‘glycoprotein metabolic process’:
 
 ``` r
-# library(go2cell)
-## basic example code
+library(go2cell)
+
+go_ids <- c("GO:0006936", "GO:0009100")
+
+results <- go2cell(go_ids)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub\!
+| cell\_type    | cell\_typeLabel     | go\_ids      | go\_termLabel                  | geneLabel |
+| :------------ | :------------------ | :----------- | :----------------------------- | :-------- |
+| wd:Q101404949 | human myofibroblast | <GO:0006936> | muscle contraction             | CALD1     |
+| wd:Q101404949 | human myofibroblast | <GO:0006936> | muscle contraction             | ACTA2     |
+| wd:Q101404949 | human myofibroblast | <GO:0006936> | muscle contraction             | MYL9      |
+| wd:Q101404949 | human myofibroblast | <GO:0006936> | muscle contraction             | DES       |
+| wd:Q101404922 | human epsilon cell  | <GO:0009100> | glycoprotein metabolic process | PCSK6     |
+| wd:Q101404940 | human myoblast      | <GO:0006936> | muscle contraction             | TPM2      |
