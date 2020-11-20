@@ -1,0 +1,11 @@
+gene,process,goid
+FASN,metabolism,GO:0008152
+APBA2,protein transport,GO:0015031
+SHH,striated muscle tissue development,GO:0014706
+SELENON,positive regulation of skeletal muscle cell proliferation,GO:0014858
+EDN1,positive regulation of mitotic nuclear division,GO:0045840
+BIRC5,protein phosphorylation,GO:0006468
+PHB,ovarian follicle atresia,GO:0001552
+CPS1,response to zinc ion,GO:0010043
+LEPR,glucose homeostasis,GO:0042593
+BRCA1,regulation of transcription from RNA polymerase III promoter,GO:0006359
