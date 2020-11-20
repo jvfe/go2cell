@@ -14,6 +14,44 @@ knitr::opts_chunk$set(
 )
 ```
 
+# go2cell
+
+go2cell is an R package with the goal to link [Gene Ontology](http://geneontology.org/) information to cell types via marker genes of said cell types, but it does all this by harnessing the strengths of open linked data in [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page).
+
+To get started with go2cell, we first need to load the package:
+
 ```{r setup}
 library(go2cell)
 ```
+
+And, for the purposes of this showcase, we'll be using a small test dataset of GO IDs that come with the package,
+called go2cell_test_data.
+
+```{r show-data}
+head(go2cell_test_data)
+```
+
+Now, you can see we have 10 Gene Ontology identifiers, related to processes such as protein metabolism and glucose homeostasis. Let's see what cell types can be matched to these identifiers.
+
+```{r go2cell}
+# The function accepts a vector of GO IDs
+results <- go2cell(go2cell_test_data$goid)
+head(results)
+```
+
+We can see in the results the cell types associated with the identifiers we had, showing cell types such as the human myoblast, along with their Wikidata Item identifier (or QID), [Q101404940](https://www.wikidata.org/wiki/Q101404940).
+
+In the same results, we can see the marker genes of these cell types that led to the conclusion, such as FGFR4, that linked the human myoblast to protein phosphorylation (GO:0006468).
+
+Now, suppose we want to do the reverse process. Say we are interested in seeing what GO IDs are associated to the marker genes of cell type [Q101405206](https://www.wikidata.org/wiki/Q101405206), or the human neuroendocrine cell. We can get this information by using the 'cell2go' function:
+
+```{r}
+# Now we use the Wikidata identifier
+human_neuroendocrine_cell <- cell2go("Q101405206")
+head(human_neuroendocrine_cell)
+```
+
+And now we've retrieved all marker genes from the human neuroendocrine cell type and all GO identifiers associated with said genes.
+
+And that's it! To sum up, you can use go2cell to link cell types to GO IDs via one of two simple functions, depending on the type of information you want to acquire.
+
