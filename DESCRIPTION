@@ -1,6 +1,6 @@
 Package: go2cell
 Type: Package
-Title: Get Cell Types Related To Gene Ontology IDs
+Title: Get Cell Types Related to Gene Ontology IDs
 Version: 0.99.0
 Authors@R: 
     c(person(given = "João Vitor",
