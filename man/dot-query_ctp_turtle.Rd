@@ -4,7 +4,7 @@
 \alias{.query_ctp_turtle}
 \title{Query local database for cell types related to particular markers}
 \usage{
-.query_ctp_turtle(query_values, query_key, selector)
+.query_ctp_turtle(query_values, query_key, selector, mode)
 }
 \arguments{
 \item{query_values}{A character vector of SPARQL-valid values}
@@ -12,6 +12,8 @@
 \item{query_key}{A character of the key value to select items by}
 
 \item{selector}{A character vector of the query_values entity}
+
+\item{mode}{A character indicating whether to run go2cell or cell2go}
 }
 \value{
 A dataframe of cell type Wikidata items and their respective markers
@@ -20,5 +22,5 @@ A dataframe of cell type Wikidata items and their respective markers
 Query local database for cell types related to particular markers
 }
 \examples{
-.query_ctp_turtle("(wd:Q14881255) (wd:Q18016342)")
+.query_ctp_turtle("wd:Q18016342", "cell_type", "gene", mode="go2cell")
 }

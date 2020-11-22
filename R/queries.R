@@ -35,27 +35,41 @@
 #' @param query_values A character vector of SPARQL-valid values
 #' @param query_key A character of the key value to select items by
 #' @param selector A character vector of the query_values entity
+#' @param mode A character indicating whether to run go2cell or cell2go
 #'
 #' @return A dataframe of cell type Wikidata items and their respective markers
 #' @examples
-#' .query_ctp_turtle("(wd:Q14881255) (wd:Q18016342)")
-.query_ctp_turtle <- function(query_values, query_key, selector) {
+#' .query_ctp_turtle("wd:Q18016342", "cell_type", "gene", mode="go2cell")
+.query_ctp_turtle <- function(query_values, query_key, selector, mode) {
   celltype_marker_graph <- rdflib::rdf_parse(celltype_marker_turtle,
     format = c("turtle")
   )
 
-  ctp_sparql <- stringr::str_glue(
-    "PREFIX ctp: <http://celltypes.wiki.opencura.com/entity/>
+  if (mode == "go2cell") {
+    ctp_sparql <- stringr::str_glue(
+      "PREFIX ctp: <http://celltypes.wiki.opencura.com/entity/>
      PREFIX wd: <http://www.wikidata.org/entity/>
       SELECT ?{query_key} ?{selector}
            WHERE {{
-            VALUES (?values) {{{query_values}}}
-            BIND (?values AS ?{selector})
-            ?{query_key} ctp:P9 ?{selector}.
+            VALUES (?{selector}) {{({query_values})}}
+            ?{query_key} ctp:P9 {query_values}.
            }}"
-  )
+    )
+  } else {
+    ctp_sparql <- stringr::str_glue(
+      "PREFIX ctp: <http://celltypes.wiki.opencura.com/entity/>
+     PREFIX wd: <http://www.wikidata.org/entity/>
+      SELECT ?{query_key} ?{selector}
+           WHERE {{
+            VALUES (?{selector}) {{({query_values})}}
+            {query_values} ctp:P9 ?{query_key}.
+           }}"
+    )
+  }
 
-  rdflib::rdf_query(celltype_marker_graph, ctp_sparql) %>%
+
+  lapply(ctp_sparql, rdflib::rdf_query, rdf = celltype_marker_graph) %>%
+    dplyr::bind_rows() %>%
     dplyr::mutate(
       cell_type = .remove_wdt_url(cell_type),
       gene = .remove_wdt_url(gene)

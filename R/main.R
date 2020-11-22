@@ -38,10 +38,9 @@ go2cell <- function(go_ids) {
 
   genes_from_go <- .get_genes_from_go(go_ids_collapsed)
 
-  gene_values <- .collapse_as_values(genes_from_go$gene)
+  gene_values <- unique(genes_from_go$gene)
 
-  celltypes <- .query_ctp_turtle(gene_values, query_key = "cell_type", selector = "gene") %>%
-    dplyr::filter(gene %in% genes_from_go$gene)
+  celltypes <- .query_ctp_turtle(gene_values, query_key = "cell_type", selector = "gene", mode = "go2cell")
 
   celltypes_collapsed <- .collapse_as_values(celltypes$cell_type)
 
@@ -99,11 +98,9 @@ cell2go <- function(celltype_qids) {
              check your input for inconsistencies.")
   }
 
-  with_wd <- stringr::str_glue("(wd:{celltype_qids})")
-  qids_parsed <- paste(with_wd, collapse = " ")
+  with_wd <- stringr::str_glue("wd:{celltype_qids}")
 
-  celltypes <- .query_ctp_turtle(qids_parsed, query_key = "cell_type", selector = "gene") %>%
-    dplyr::filter(cell_type %in% gsub("\\(|\\)", "", with_wd))
+  celltypes <- .query_ctp_turtle(with_wd, query_key = "gene", selector = "cell_type", mode = "cell2go")
 
   gene_values <- .collapse_as_values(celltypes$gene)
 
