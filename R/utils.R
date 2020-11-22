@@ -22,7 +22,7 @@
 #'
 #' @return A character vector
 #' @examples
-#' .remove_wdt_url(c("http://www.wikidata.org/entity/Q18031649", "http://www.wikidata.org/entity/Q227339"))
+#' .remove_wdt_url("http://www.wikidata.org/entity/Q18031649")
 .remove_wdt_url <- function(column) {
   stringr::str_replace_all(
     column, "http://www.wikidata.org/entity/",
