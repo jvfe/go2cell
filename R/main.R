@@ -34,27 +34,28 @@
 #' go2cell("GO_0010043")
 #' }
 go2cell <- function(go_ids) {
+
+  if (any(grepl("GO:\\d+", go_ids) == FALSE)) {
+    stop("A GO identifier given doesn't match the regex 'GO:\\d+',
+             check your input for inconsistencies.")
+  }
+
   go_ids_collapsed <- .collapse_as_values(go_ids, quotes = TRUE)
 
-  genes_from_go <- .get_genes_from_go(go_ids_collapsed)
+  query <- sprintf(
+  "SELECT ?cell_type ?cell_typeLabel ?go_ids ?go_termLabel ?geneLabel WHERE {
+  VALUES (?go_ids) {%s}
+  ?go_term wdt:P686 ?go_ids.
+  ?protein wdt:P703 wd:Q15978631;
+    ?godomain ?go_term;
+    wdt:P702 ?gene.
+  ?cell_type wdt:P8872 ?gene.
+  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }
+  }",
+  go_ids_collapsed)
 
-  gene_values <- unique(genes_from_go$gene)
-
-  celltypes <- .query_ctp_turtle(gene_values, query_key = "cell_type", selector = "gene", mode = "go2cell")
-
-  celltypes_collapsed <- .collapse_as_values(celltypes$cell_type)
-
-  celltype_wdt <- .get_celltype_items(celltypes_collapsed)
-
-  final_table <- celltypes %>%
-    dplyr::inner_join(genes_from_go,
-      by = "gene"
-    ) %>%
-    dplyr::left_join(celltype_wdt, by = c("cell_type")) %>%
-    dplyr::select(
-      cell_type, cell_typeLabel, go_ids, go_termLabel,
-      geneLabel
-    )
+  results <- WikidataQueryServiceR::query_wikidata(query) %>%
+    dplyr::mutate(cell_type = .remove_wdt_url(cell_type))
 }
 
 
@@ -98,23 +99,20 @@ cell2go <- function(celltype_qids) {
              check your input for inconsistencies.")
   }
 
-  with_wd <- stringr::str_glue("wd:{celltype_qids}")
+  with_wd <- paste(stringr::str_glue("wd:{celltype_qids}"), collapse = " ")
 
-  celltypes <- .query_ctp_turtle(with_wd, query_key = "gene", selector = "cell_type", mode = "cell2go")
+  query <- sprintf(
+    "SELECT ?cell_type ?cell_typeLabel ?go_ids ?go_termLabel ?geneLabel WHERE {
+  VALUES ?cell_type {%s}
+  ?cell_type wdt:P8872 ?gene.
+  ?gene wdt:P703 wd:Q15978631;
+    wdt:P688 ?protein.
+  ?protein (wdt:P680|wdt:P681|wdt:P682) ?go_term.
+  ?go_term wdt:P686 ?go_ids.
+  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }
+  }",
+  with_wd)
 
-  gene_values <- .collapse_as_values(celltypes$gene)
-
-  go_from_genes <- .get_go_from_genes(gene_values)
-
-  celltypes_collapsed <- .collapse_as_values(celltypes$cell_type)
-
-  celltype_wdt <- .get_celltype_items(celltypes_collapsed)
-
-  final_table <- celltypes %>%
-    dplyr::inner_join(go_from_genes, by = "gene") %>%
-    dplyr::left_join(celltype_wdt, by = c("cell_type")) %>%
-    dplyr::select(
-      cell_type, cell_typeLabel, go_term, go_itemLabel,
-      geneLabel
-    )
+  results <- WikidataQueryServiceR::query_wikidata(query) %>%
+    dplyr::mutate(cell_type = .remove_wdt_url(cell_type))
 }
