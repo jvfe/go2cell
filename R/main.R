@@ -34,7 +34,6 @@
 #' go2cell("GO_0010043")
 #' }
 go2cell <- function(go_ids) {
-
   if (any(grepl("GO:\\d+", go_ids) == FALSE)) {
     stop("A GO identifier given doesn't match the regex 'GO:\\d+',
              check your input for inconsistencies.")
@@ -43,7 +42,7 @@ go2cell <- function(go_ids) {
   go_ids_collapsed <- .collapse_as_values(go_ids, quotes = TRUE)
 
   query <- sprintf(
-  "SELECT ?cell_type ?cell_typeLabel ?go_ids ?go_termLabel ?geneLabel WHERE {
+    "SELECT ?cell_type ?cell_typeLabel ?go_ids ?go_termLabel ?geneLabel WHERE {
   VALUES (?go_ids) {%s}
   ?go_term wdt:P686 ?go_ids.
   ?protein wdt:P703 wd:Q15978631;
@@ -52,7 +51,8 @@ go2cell <- function(go_ids) {
   ?cell_type wdt:P8872 ?gene.
   SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }
   }",
-  go_ids_collapsed)
+    go_ids_collapsed
+  )
 
   results <- WikidataQueryServiceR::query_wikidata(query) %>%
     dplyr::mutate(cell_type = .remove_wdt_url(cell_type))
@@ -111,7 +111,8 @@ cell2go <- function(celltype_qids) {
   ?go_term wdt:P686 ?go_ids.
   SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }
   }",
-  with_wd)
+    with_wd
+  )
 
   results <- WikidataQueryServiceR::query_wikidata(query) %>%
     dplyr::mutate(cell_type = .remove_wdt_url(cell_type))

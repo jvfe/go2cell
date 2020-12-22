@@ -19,9 +19,7 @@ devtools::load_all()
 <!-- badges: start -->
 <!-- badges: end -->
 
-By using [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page) and a local RDF database of cell type
-gene markers, go2cell links Gene Ontology terms to cell types, therefore enriching Omics results with open 
-semantic knowledge.
+By using [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page), go2cell links Gene Ontology terms to cell types, therefore enriching Omics results with open semantic knowledge.
 
 ## Installation
 
