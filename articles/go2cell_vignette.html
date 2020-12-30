@@ -108,14 +108,14 @@
 <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/go2cell.html">go2cell</a></span><span class="op">(</span><span class="va">go2cell_test_data</span><span class="op">$</span><span class="va">goid</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 x 5</span>
-<span class="co">#&gt;   cell_type    cell_typeLabel                    go_ids   go_termLabel geneLabel</span>
-<span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;                             &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;    </span>
-<span class="co">#&gt; 1 wd:Q1014050… human enterocyte                  GO:0008… metabolism   CPS1     </span>
-<span class="co">#&gt; 2 wd:Q1014051… human hepatocyte                  GO:0008… metabolism   CPS1     </span>
-<span class="co">#&gt; 3 wd:Q1014050… human hematopoietic stem cell     GO:0008… metabolism   PRNP     </span>
-<span class="co">#&gt; 4 wd:Q1014048… human urothelial cell             GO:0008… metabolism   NAT1     </span>
-<span class="co">#&gt; 5 wd:Q1014049… human erythroid-like and erythro… GO:0008… metabolism   ALAS2    </span>
-<span class="co">#&gt; 6 wd:Q1014049… human alpha cell                  GO:0008… metabolism   ALDH1A1</span></code></pre></div>
+<span class="co">#&gt;   cell_type     cell_typeLabel        go_ids     go_termLabel geneLabel</span>
+<span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;                 &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;    </span>
+<span class="co">#&gt; 1 wd:Q101404898 human oligodendrocyte GO:0008152 metabolism   FASN     </span>
+<span class="co">#&gt; 2 wd:Q101405101 human hepatocyte      GO:0008152 metabolism   PAH      </span>
+<span class="co">#&gt; 3 wd:Q101405101 human hepatocyte      GO:0008152 metabolism   GCK      </span>
+<span class="co">#&gt; 4 wd:Q101404894 human melanocyte      GO:0008152 metabolism   TYR      </span>
+<span class="co">#&gt; 5 wd:Q101404913 human purkinje neuron GO:0008152 metabolism   PDE5A    </span>
+<span class="co">#&gt; 6 wd:Q101405045 human pericyte        GO:0008152 metabolism   PDE5A</span></code></pre></div>
 <p>We can see in the results the cell types associated with the identifiers we had, showing cell types such as the human myoblast, along with their Wikidata Item identifier (or QID), <a href="https://www.wikidata.org/wiki/Q101404940">Q101404940</a>.</p>
 <p>In the same results, we can see the marker genes of these cell types that led to the conclusion, such as FGFR4, that linked the human myoblast to protein phosphorylation (<a href="GO:0006468" class="uri">GO:0006468</a>).</p>
 <p>Now, suppose we want to do the reverse process. Say we are interested in seeing what GO IDs are associated to the marker genes of cell type <a href="https://www.wikidata.org/wiki/Q101405206">Q101405206</a>, or the human neuroendocrine cell. We can get this information by using the ‘cell2go’ function:</p>
