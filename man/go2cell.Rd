@@ -4,10 +4,13 @@
 \alias{go2cell}
 \title{Get cell types from GO ids}
 \usage{
-go2cell(go_ids)
+go2cell(go_ids, species = "Homo sapiens")
 }
 \arguments{
 \item{go_ids}{A character vector of Gene Ontology identifiers.}
+
+\item{species}{A character of a species, can either be Homo sapiens
+(default) or Mus musculus.}
 }
 \value{
 A dataframe of 5 columns: The first two correspond to cell types,
