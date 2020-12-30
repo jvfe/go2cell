@@ -11,6 +11,8 @@
 #' the given GO identifiers.
 #'
 #' @param go_ids A character vector of Gene Ontology identifiers.
+#' @param species A character of a species, can either be Homo sapiens
+#'    (default) or Mus musculus.
 #'
 #' @return A dataframe of 5 columns: The first two correspond to cell types,
 #'    that is, their Wikidata Identifier and their name. The two following
@@ -33,24 +35,26 @@
 #' # IDs should use ':' not '_'
 #' go2cell("GO_0010043")
 #' }
-go2cell <- function(go_ids) {
+go2cell <- function(go_ids, species = "Homo sapiens") {
   if (any(grepl("GO:\\d+", go_ids) == FALSE)) {
     stop("A GO identifier given doesn't match the regex 'GO:\\d+',
              check your input for inconsistencies.")
   }
 
+  species_item <- .get_species_item(species)
   go_ids_collapsed <- .collapse_as_values(go_ids, quotes = TRUE)
 
   query <- stringr::str_glue(
     "SELECT ?cell_type ?cell_typeLabel ?go_ids ?go_termLabel ?geneLabel WHERE {{
   VALUES (?go_ids) {{{go_ids_collapsed}}
   ?go_term wdt:P686 ?go_ids.
-  ?protein wdt:P703 wd:Q15978631;
+  ?protein wdt:P703 wd:{species_item};
     ?godomain ?go_term;
     wdt:P702 ?gene.
   ?cell_type wdt:P8872 ?gene.
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language \"en\". }}
-  }}")
+  }}"
+  )
 
   results <- WikidataQueryServiceR::query_wikidata(query) %>%
     dplyr::mutate(cell_type = .remove_wdt_url(cell_type))
@@ -103,12 +107,12 @@ cell2go <- function(celltype_qids) {
     "SELECT ?cell_type ?cell_typeLabel ?go_ids ?go_termLabel ?geneLabel WHERE {{
   VALUES ?cell_type {{{with_wd}}
   ?cell_type wdt:P8872 ?gene.
-  ?gene wdt:P703 wd:Q15978631;
-    wdt:P688 ?protein.
+  ?gene wdt:P688 ?protein.
   ?protein (wdt:P680|wdt:P681|wdt:P682) ?go_term.
   ?go_term wdt:P686 ?go_ids.
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language \"en\". }}
-  }}")
+  }}"
+  )
 
   results <- WikidataQueryServiceR::query_wikidata(query) %>%
     dplyr::mutate(cell_type = .remove_wdt_url(cell_type))

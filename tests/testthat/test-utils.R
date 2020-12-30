@@ -24,3 +24,17 @@ test_that("URL removal works", {
 
   expect_equal(clean, c("wd:Q18031649", "wd:Q227339"))
 })
+
+test_that("Species key-value works", {
+  species1 <- "Homo sapiens"
+  species2 <- "Mus musculus"
+
+  expect_equal(.get_species_item(species1), "Q15978631")
+  expect_equal(.get_species_item(species2), "Q83310")
+})
+
+test_that("Not supported species returns error", {
+  species <- "Sus scrofa"
+
+  expect_error(.get_species_item(species))
+})

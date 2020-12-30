@@ -29,3 +29,22 @@
     "wd:"
   )
 }
+
+#' Return the item for a particular species
+#'
+#' @param species_name The scientific name of the species
+#'
+#' @return The Wikidata item for said species
+#'
+#' @examples
+#' .get_species_item("Homo sapiens")
+.get_species_item <- function(species_name) {
+  values <- c("Q15978631", "Q83310")
+  names(values) <- c("Homo sapiens", "Mus musculus")
+
+  if (!(species_name %in% names(values))) {
+    stop("Species must be either 'Homo sapiens' or 'Mus musculus'")
+  }
+
+  values[[species_name]]
+}

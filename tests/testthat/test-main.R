@@ -7,13 +7,21 @@ go_ids <- c(
 celltype_qids <- c("Q101404881", "Q101404901", "Q101404922")
 
 broken_id <- "GO_0006936"
-# broken_qid <-
+broken_qid <- "101404881"
 
 test_that("go2cell works", {
   celltype_info <- go2cell(go_ids)
 
   expect_setequal(unique(celltype_info$go_ids), go_ids)
   expect_true(nrow(celltype_info) > 100)
+  expect_equal(ncol(celltype_info), 5)
+})
+
+test_that("go2cell w/ Mus musculus works", {
+  celltype_info <- go2cell(go_ids, species = "Mus musculus")
+
+  expect_setequal(unique(celltype_info$go_ids), go_ids)
+  expect_true(any(grepl("mouse", celltype_info$cell_typeLabel, fixed = TRUE)))
   expect_equal(ncol(celltype_info), 5)
 })
 
@@ -27,4 +35,8 @@ test_that("cell2go works", {
 
 test_that("broken GO ids raise error", {
   expect_error(go2cell(broken_id))
+})
+
+test_that("broken Qids raise error", {
+  expect_error(cell2go(broken_qid))
 })
