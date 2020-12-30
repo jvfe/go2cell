@@ -18,8 +18,8 @@ devtools::load_all()
 
 
 <!-- badges: start -->
-[![R build
-status](https://github.com/jvfe/go2cell/workflows/R-CMD-check/badge.svg)](https://github.com/jvfe/go2cell/actions)
+[![R build status](https://github.com/jvfe/go2cell/workflows/R-CMD-check/badge.svg)](https://github.com/jvfe/go2cell/actions)
+[![docs](https://github.com/jvfe/go2cell/workflows/pkgdown/badge.svg)](https://jvfe.github.io/go2cell/index.html)
 <!-- badges: end -->
 
 By using [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page), go2cell links Gene Ontology terms to cell types, therefore enriching Omics results with open semantic knowledge.
