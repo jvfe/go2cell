@@ -12,12 +12,7 @@ Authors@R:
              family = "Lubiana",
              email = "tiago.lubiana.alves@usp.br",
              role = c("aut", "dtc"),
-             comment = c(ORCID = "0000-0003-2473-2313")),
-      person(given = "Rodrigo",
-             family = "Dalmolin",
-             email = "rodrigo.dalmolin@imd.ufrn.br",
-             role = c("aut", "ths"),
-             comment = c(ORCID = "0000-0002-1688-6155"))
+             comment = c(ORCID = "0000-0003-2473-2313"))
       )
 Description: Uses Wikidata queries to link
     Gene Ontology IDs to cell types.

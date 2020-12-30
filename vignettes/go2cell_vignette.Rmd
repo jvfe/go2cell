@@ -1,8 +1,8 @@
 ---
-title: "go2cell_vignette"
+title: "Introduction to go2cell"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{go2cell_vignette}
+  %\VignetteIndexEntry{Introduction to go2cell}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
