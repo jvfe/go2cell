@@ -41,18 +41,16 @@ go2cell <- function(go_ids) {
 
   go_ids_collapsed <- .collapse_as_values(go_ids, quotes = TRUE)
 
-  query <- sprintf(
-    "SELECT ?cell_type ?cell_typeLabel ?go_ids ?go_termLabel ?geneLabel WHERE {
-  VALUES (?go_ids) {%s}
+  query <- stringr::str_glue(
+    "SELECT ?cell_type ?cell_typeLabel ?go_ids ?go_termLabel ?geneLabel WHERE {{
+  VALUES (?go_ids) {{{go_ids_collapsed}}
   ?go_term wdt:P686 ?go_ids.
   ?protein wdt:P703 wd:Q15978631;
     ?godomain ?go_term;
     wdt:P702 ?gene.
   ?cell_type wdt:P8872 ?gene.
-  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }
-  }",
-    go_ids_collapsed
-  )
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language \"en\". }}
+  }}")
 
   results <- WikidataQueryServiceR::query_wikidata(query) %>%
     dplyr::mutate(cell_type = .remove_wdt_url(cell_type))
@@ -101,18 +99,16 @@ cell2go <- function(celltype_qids) {
 
   with_wd <- paste(stringr::str_glue("wd:{celltype_qids}"), collapse = " ")
 
-  query <- sprintf(
-    "SELECT ?cell_type ?cell_typeLabel ?go_ids ?go_termLabel ?geneLabel WHERE {
-  VALUES ?cell_type {%s}
+  query <- stringr::str_glue(
+    "SELECT ?cell_type ?cell_typeLabel ?go_ids ?go_termLabel ?geneLabel WHERE {{
+  VALUES ?cell_type {{{with_wd}}
   ?cell_type wdt:P8872 ?gene.
   ?gene wdt:P703 wd:Q15978631;
     wdt:P688 ?protein.
   ?protein (wdt:P680|wdt:P681|wdt:P682) ?go_term.
   ?go_term wdt:P686 ?go_ids.
-  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }
-  }",
-    with_wd
-  )
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language \"en\". }}
+  }}")
 
   results <- WikidataQueryServiceR::query_wikidata(query) %>%
     dplyr::mutate(cell_type = .remove_wdt_url(cell_type))
