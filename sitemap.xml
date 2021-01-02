@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://jvfe.github.io/go2cell/index.html</loc>
+  </url>
+  <url>
+    <loc>https://jvfe.github.io/go2cell/reference/cell2go.html</loc>
+  </url>
+  <url>
+    <loc>https://jvfe.github.io/go2cell/reference/dot-collapse_as_values.html</loc>
+  </url>
+  <url>
+    <loc>https://jvfe.github.io/go2cell/reference/dot-get_species_item.html</loc>
+  </url>
+  <url>
+    <loc>https://jvfe.github.io/go2cell/reference/dot-remove_wdt_url.html</loc>
+  </url>
+  <url>
+    <loc>https://jvfe.github.io/go2cell/reference/go2cell.html</loc>
+  </url>
+  <url>
+    <loc>https://jvfe.github.io/go2cell/reference/go2cell_test_data.html</loc>
+  </url>
+  <url>
+    <loc>https://jvfe.github.io/go2cell/articles/go2cell_vignette.html</loc>
+  </url>
+</urlset>

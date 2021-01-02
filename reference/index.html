@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -103,7 +103,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jvfe/go2cell">
+    <span class="fas fa-github"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -131,7 +136,32 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-functions" class="hasAnchor"><a href="#section-functions" class="anchor"></a>Functions</h2>
+          <p class="section-desc"><p>Base functionality of the package</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="go2cell.html">go2cell()</a></code> </p>
+        </td>
+        <td><p>Get cell types from GO ids</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cell2go.html">cell2go()</a></code> </p>
+        </td>
+        <td><p>Get GO ids from cell types</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-datasets" class="hasAnchor"><a href="#section-datasets" class="anchor"></a>Datasets</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -143,10 +173,23 @@
       <tr>
         
         <td>
-          <p><code><a href="cell2go.html">cell2go()</a></code> </p>
+          <p><code><a href="go2cell_test_data.html">go2cell_test_data</a></code> </p>
         </td>
-        <td><p>Get GO ids from cell types</p></td>
-      </tr><tr>
+        <td><p>A dataframe of Gene symbols and GO IDs</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-utilities" class="hasAnchor"><a href="#section-utilities" class="anchor"></a>Utilities</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
           <p><code><a href="dot-collapse_as_values.html">.collapse_as_values()</a></code> </p>
@@ -164,18 +207,6 @@
           <p><code><a href="dot-remove_wdt_url.html">.remove_wdt_url()</a></code> </p>
         </td>
         <td><p>Substitute the wikidata url for a SPARQL-friendly wd:</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="go2cell.html">go2cell()</a></code> </p>
-        </td>
-        <td><p>Get cell types from GO ids</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="go2cell_test_data.html">go2cell_test_data</a></code> </p>
-        </td>
-        <td><p>A dataframe of Gene symbols and GO IDs</p></td>
       </tr>
     </tbody>
     </table>
