@@ -1,0 +1,24 @@
+url: https://jvfe.github.io/go2cell
+
+template:
+  params:
+    bootswatch: cosmo
+
+navbar:
+  title: go2cell
+  right:
+    - icon: fa-github
+      href: https://github.com/jvfe/go2cell
+
+reference:
+- title: Functions
+  desc:  Base functionality of the package
+- contents:
+  - go2cell
+  - cell2go
+- title: Datasets
+- contents:
+  - go2cell_test_data
+- title: Utilities
+- contents:
+  - starts_with("\\.")
