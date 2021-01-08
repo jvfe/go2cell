@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   go2cell_vignette: go2cell_vignette.html
-last_built: 2021-01-02T12:20Z
+last_built: 2021-01-08T12:15Z
 urls:
   reference: https://jvfe.github.io/go2cell/reference
   article: https://jvfe.github.io/go2cell/articles

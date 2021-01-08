@@ -131,14 +131,14 @@
 <span class="va">human_neuroendocrine_cell</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cell2go.html">cell2go</a></span><span class="op">(</span><span class="st">"Q101405206"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">human_neuroendocrine_cell</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 x 5</span>
-<span class="co">#&gt;   cell_type     cell_typeLabel            go_ids     go_termLabel geneLabel</span>
-<span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;                     &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;    </span>
-<span class="co">#&gt; 1 wd:Q101405206 human neuroendocrine cell GO:0007613 memory       CCK      </span>
-<span class="co">#&gt; 2 wd:Q101405206 human neuroendocrine cell GO:0007613 memory       ATXN1    </span>
-<span class="co">#&gt; 3 wd:Q101405206 human neuroendocrine cell GO:0007586 digestion    SST      </span>
-<span class="co">#&gt; 4 wd:Q101405206 human neuroendocrine cell GO:0007586 digestion    CCK      </span>
-<span class="co">#&gt; 5 wd:Q101405206 human neuroendocrine cell GO:0007612 learning     ATXN1    </span>
-<span class="co">#&gt; 6 wd:Q101405206 human neuroendocrine cell GO:0007612 learning     GRM5</span></code></pre></div>
+<span class="co">#&gt;   cell_type     cell_typeLabel            go_ids     go_termLabel  geneLabel</span>
+<span class="co">#&gt;   &lt;chr&gt;         &lt;chr&gt;                     &lt;chr&gt;      &lt;chr&gt;         &lt;chr&gt;    </span>
+<span class="co">#&gt; 1 wd:Q101405206 human neuroendocrine cell GO:0005886 cell membrane GPR88    </span>
+<span class="co">#&gt; 2 wd:Q101405206 human neuroendocrine cell GO:0005886 cell membrane GRM5     </span>
+<span class="co">#&gt; 3 wd:Q101405206 human neuroendocrine cell GO:0005886 cell membrane ABHD2    </span>
+<span class="co">#&gt; 4 wd:Q101405206 human neuroendocrine cell GO:0005886 cell membrane CLASP2   </span>
+<span class="co">#&gt; 5 wd:Q101405206 human neuroendocrine cell GO:0005886 cell membrane ARHGDIG  </span>
+<span class="co">#&gt; 6 wd:Q101405206 human neuroendocrine cell GO:0005730 nucleolus     ATXN1</span></code></pre></div>
 <p>And now we’ve retrieved all marker genes from the human neuroendocrine cell type and all GO identifiers associated with said genes.</p>
 <p>And that’s it! To sum up, you can use go2cell to link cell types to GO IDs via one of two simple functions, depending on the type of information you want to acquire.</p>
 </div>
