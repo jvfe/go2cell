@@ -1,6 +1,7 @@
 url: https://jvfe.github.io/go2cell
 
 template:
+  bootstrap: 5
   params:
     bootswatch: cosmo
 
