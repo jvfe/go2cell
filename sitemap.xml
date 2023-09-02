@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://jvfe.github.io/go2cell/404.html</loc>
+  </url>
+  <url>
+    <loc>https://jvfe.github.io/go2cell/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://jvfe.github.io/go2cell/articles/go2cell_vignette.html</loc>
+  </url>
+  <url>
+    <loc>https://jvfe.github.io/go2cell/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://jvfe.github.io/go2cell/authors.html</loc>
+  </url>
+  <url>
     <loc>https://jvfe.github.io/go2cell/index.html</loc>
+  </url>
+  <url>
+    <loc>https://jvfe.github.io/go2cell/news/index.html</loc>
   </url>
   <url>
     <loc>https://jvfe.github.io/go2cell/reference/cell2go.html</loc>
@@ -22,6 +40,9 @@
     <loc>https://jvfe.github.io/go2cell/reference/go2cell_test_data.html</loc>
   </url>
   <url>
-    <loc>https://jvfe.github.io/go2cell/articles/go2cell_vignette.html</loc>
+    <loc>https://jvfe.github.io/go2cell/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://jvfe.github.io/go2cell/reference/pipe.html</loc>
   </url>
 </urlset>
