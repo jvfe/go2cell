@@ -15,6 +15,3 @@ The Wikidata item for said species
 \description{
 Return the item for a particular species
 }
-\examples{
-.get_species_item("Homo sapiens")
-}
