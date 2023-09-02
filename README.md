@@ -5,8 +5,8 @@
 
 <!-- badges: start -->
 
-[![docs](https://github.com/jvfe/go2cell/workflows/pkgdown/badge.svg)](https://jvfe.github.io/go2cell/index.html)
 [![R-CMD-check](https://github.com/jvfe/go2cell/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jvfe/go2cell/actions/workflows/R-CMD-check.yaml)
+[![docs](https://github.com/jvfe/go2cell/workflows/pkgdown/badge.svg)](https://jvfe.github.io/go2cell/index.html)
 <!-- badges: end -->
 
 By using [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page),
